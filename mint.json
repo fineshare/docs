@@ -81,6 +81,14 @@
         "api-reference/endpoint/createaudiochanger"
       ]
     }
+	
+	{
+      "group": "Endpoint Online Voice Changer",
+      "pages": [
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/createaudiochanger"
+      ]
+    }
   ],
   "footerSocials": {
     "x": "https://x.com/mintlify",
