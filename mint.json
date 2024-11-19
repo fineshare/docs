@@ -80,8 +80,7 @@
         "api-reference/endpoint/create",
         "api-reference/endpoint/createaudiochanger"
       ]
-    }
-	
+    },
 	{
       "group": "Endpoint Online Voice Changer",
       "pages": [
