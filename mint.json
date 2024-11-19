@@ -46,7 +46,12 @@
       "name": "Blog",
       "icon": "newspaper",
       "url": "https://mintlify.com/blog"
-    }
+    },
+	{
+    "name": "API Reference",
+    "icon": "code",
+    "url": "/docs/api-reference/openapi-1.json"
+  }
   ],
   "navigation": [
     {

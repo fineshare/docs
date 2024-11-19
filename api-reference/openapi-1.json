@@ -1,0 +1,177 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Text-to-Speech API",
+    "description": "API for 111111 converting text to speech using FSMSTextToSpeech.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/fsmstexttospeech111": {
+      "post": {
+        "tags": [
+          "Text-to-Speech"
+        ],
+        "summary": "Converts text to speech using specified parameters.",
+        "operationId": "FSMSTextToSpeech",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TTSReqData"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Bearer token for authentication."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully processed the text-to-speech request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Text-to-speech processing successful."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Bad Request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TTSReqData": {
+        "type": "object",
+        "properties": {
+          "Engine": {
+            "type": "string",
+            "description": "The engine to use for text-to-speech."
+          },
+          "SliceId": {
+            "type": "string",
+            "description": "The slice identifier."
+          },
+          "Uuid": {
+            "type": "string",
+            "description": "The unique user identifier."
+          },
+          "AppId": {
+            "type": "string",
+            "description": "The application identifier."
+          },
+          "FeatureId": {
+            "type": "string",
+            "description": "The feature identifier."
+          },
+          "speech": {
+            "type": "string",
+            "description": "The input text to convert to speech."
+          },
+          "voice": {
+            "type": "string",
+            "description": "The voice configuration."
+          },
+          "DesignUuid": {
+            "type": "string",
+            "description": "Design-specific UUID."
+          },
+          "platform": {
+            "type": "string",
+            "description": "The platform for which the speech is generated."
+          },
+          "WordBoundary": {
+            "type": "boolean",
+            "description": "Whether to include word boundary information."
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/TextToSpeechParameter"
+          }
+        }
+      },
+      "TextToSpeechParameter": {
+        "type": "object",
+        "properties": {
+          "Speed": {
+            "type": "number",
+            "description": "Speed of the speech."
+          },
+          "LanguageCode": {
+            "type": "string",
+            "description": "Input language code."
+          },
+          "OutputLanguage": {
+            "type": "string",
+            "description": "Supported language for output."
+          },
+          "OutputSpeed": {
+            "type": "string",
+            "description": "Desired speed for the output speech."
+          },
+          "OutputGender": {
+            "type": "string",
+            "description": "Gender of the voice (male or female)."
+          },
+          "Name": {
+            "type": "string",
+            "description": "Name of the voice."
+          },
+          "Ssml": {
+            "type": "boolean",
+            "description": "Whether SSML (Speech Synthesis Markup Language) is used."
+          },
+          "Effect": {
+            "type": "string",
+            "description": "Effect to apply to the speech."
+          },
+          "Amotion": {
+            "type": "string",
+            "description": "Emotion or tone of the voice."
+          },
+          "Pitch": {
+            "type": "number",
+            "description": "Pitch adjustment for the voice."
+          }
+        }
+      }
+    }
+  }
+}
