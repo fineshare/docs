@@ -1,0 +1,138 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Audio File Modification API",
+    "version": "1.0.0",
+    "description": "API for modifying audio file properties."
+  },
+  "paths": {
+    "/api/changeaudiofile": {
+      "post": {
+        "summary": "Modify properties of an audio file",
+        "operationId": "ChangeAudioFile",
+        "tags": ["Audio Modification"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileChangeReqModel"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Bearer token for authorization."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audio file successfully modified.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Audio file modification completed successfully."
+                    },
+                    "uuid": {
+                      "type": "string",
+                      "example": "123e4567-e89b-12d3-a456-426614174000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - unable to process the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FileChangeReqModel": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "example": "group123"
+          },
+          "sliceId": {
+            "type": "string",
+            "example": "slice456"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "voice": {
+            "type": "string",
+            "example": "newVoice123"
+          },
+          "designUuid": {
+            "type": "string",
+            "example": "design789"
+          },
+          "pitch": {
+            "type": "number",
+            "format": "float",
+            "example": 1.5
+          },
+          "speed": {
+            "type": "number",
+            "format": "float",
+            "example": 1.2
+          },
+          "from": {
+            "type": "string",
+            "example": "sourceLanguage"
+          },
+          "outputFormat": {
+            "type": "string",
+            "example": "mp3"
+          },
+          "duration": {
+            "type": "integer",
+            "example": 60
+          },
+          "audioName": {
+            "type": "string",

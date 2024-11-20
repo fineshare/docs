@@ -80,10 +80,12 @@
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Endpoint TTS",
       "pages": [
         "api-reference/endpoint/create",
         "api-reference/endpoint/createaudiochanger"
+		
+		
       ]
     },
 	{
@@ -91,7 +93,7 @@
       "pages": [
 	    "api-reference/endpoint/createaudiochanger",
         "api-reference/endpoint/uploadaudiofile",
-      
+        "api-reference/endpoint/changeaudiofile"
       ]
     }
   ],
