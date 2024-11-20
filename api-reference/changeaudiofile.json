@@ -3,14 +3,14 @@
   "info": {
     "title": "Start Audio Conversion",
     "version": "1.0.0",
-    "description": "API for modifying audio file properties."
+    "description": "API for modifying an audio file with various transformation parameters."
   },
   "paths": {
     "/api/changeaudiofile": {
       "post": {
-        "summary": "Modify properties of an audio file",
+        "summary": "Change Audio File",
         "operationId": "ChangeAudioFile",
-        "tags": ["Audio Modification"],
+        "tags": ["Audio Management"],
         "requestBody": {
           "required": true,
           "content": {
@@ -29,32 +29,23 @@
             "schema": {
               "type": "string"
             },
-            "description": "Bearer token for authorization."
+            "description": "Bearer token for authentication.",
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cC..."
           }
         ],
         "responses": {
           "200": {
-            "description": "Audio file successfully modified.",
+            "description": "Audio file transformed successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Audio file modification completed successfully."
-                    },
-                    "uuid": {
-                      "type": "string",
-                      "example": "123e4567-e89b-12d3-a456-426614174000"
-                    }
-                  }
+                  "$ref": "#/components/schemas/ChangeAudioFileResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request - invalid input.",
+            "description": "Bad request - missing or invalid parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -64,7 +55,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized - invalid or missing token.",
+            "description": "Unauthorized - invalid or missing Authorization header.",
             "content": {
               "application/json": {
                 "schema": {
@@ -94,45 +85,153 @@
         "properties": {
           "groupId": {
             "type": "string",
+            "description": "Group ID associated with the audio file.",
             "example": "group123"
           },
           "sliceId": {
             "type": "string",
+            "description": "Slice ID of the audio file.",
             "example": "slice456"
           },
           "uuid": {
             "type": "string",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
+            "description": "Unique identifier of the audio file.",
+            "example": "uuid789"
           },
           "voice": {
             "type": "string",
-            "example": "newVoice123"
+            "description": "Voice type for transformation.",
+            "example": "narration"
           },
           "designUuid": {
             "type": "string",
-            "example": "design789"
+            "description": "Unique identifier for the design.",
+            "example": "design123"
           },
           "pitch": {
             "type": "number",
             "format": "float",
-            "example": 1.5
+            "description": "Pitch adjustment value.",
+            "example": 1.2
           },
           "speed": {
             "type": "number",
             "format": "float",
-            "example": 1.2
+            "description": "Speed adjustment value.",
+            "example": 1.5
           },
           "from": {
             "type": "string",
-            "example": "sourceLanguage"
+            "description": "Source format or language.",
+            "example": "en-US"
           },
           "outputFormat": {
             "type": "string",
+            "description": "Desired output format for the audio file.",
             "example": "mp3"
           },
           "duration": {
             "type": "integer",
-            "example": 60
+            "description": "Duration of the audio file in seconds.",
+            "example": 120
           },
           "audioName": {
             "type": "string",
+            "description": "Name of the audio file.",
+            "example": "sample_audio"
+          },
+          "cut": {
+            "type": "integer",
+            "description": "Cut operation identifier.",
+            "example": 0
+          },
+          "platform": {
+            "type": "string",
+            "description": "Platform information for the transformation.",
+            "example": "web"
+          },
+          "pitch_control": {
+            "type": "string",
+            "description": "Advanced pitch control settings.",
+            "example": "semi-tone"
+          },
+          "effect": {
+            "type": "string",
+            "description": "Special effect to apply to the audio.",
+            "example": "echo"
+          },
+          "amotion": {
+            "type": "string",
+            "description": "Emotion or tone of the audio.",
+            "example": "happy"
+          },
+          "operation": {
+            "type": "string",
+            "description": "Type of operation to perform.",
+            "example": "transform"
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "description": "URL for the thumbnail of the audio.",
+            "example": "http://example.com/thumbnail.jpg"
+          },
+          "engine": {
+            "type": "string",
+            "description": "Engine used for processing.",
+            "example": "engine_v1"
+          },
+          "step": {
+            "type": "integer",
+            "description": "Processing step identifier.",
+            "example": 2
+          },
+          "auto_f0_adjust": {
+            "type": "boolean",
+            "description": "Indicates if automatic F0 adjustment is applied.",
+            "example": true
+          }
+        }
+      },
+      "ChangeAudioFileResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "Audio file transformed successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "audioUrl": {
+                "type": "string",
+                "example": "http://example.com/transformed_audio.mp3"
+              },
+              "processingTime": {
+                "type": "integer",
+                "description": "Time taken to process the audio in milliseconds.",
+                "example": 1500
+              }
+            }
+          }
+        }
+      },
+      "ErrorModel": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Invalid parameters."
+          },
+          "details": {
+            "type": "string",
+            "example": "The 'pitch' parameter must be a positive number."
+          }
+        }
+      }
+    }
+  }
+}
