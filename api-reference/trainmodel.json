@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Fast Train Model API",
+    "title": "Train Model",
     "version": "1.0.0",
     "description": "API to train a voice model quickly with specified attributes and files."
   },
