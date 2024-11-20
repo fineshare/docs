@@ -3,12 +3,12 @@
   "info": {
     "title": "Voice Pagination",
     "version": "1.0.0",
-    "description": "API to retrieve a paginated list of available voices."
+    "description": "API for retrieving a paginated list of voices with filtering options."
   },
   "paths": {
     "/api/pagevoices": {
       "get": {
-        "summary": "Retrieve paginated voices",
+        "summary": "Retrieve Paginated Voices",
         "operationId": "PageVoices",
         "tags": ["Voice Management"],
         "parameters": [
@@ -19,8 +19,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Version of the voice data.",
-            "example": "1.0"
+            "description": "Version of the voices data."
           },
           {
             "name": "categroy",
@@ -30,7 +29,7 @@
               "type": "string"
             },
             "description": "Category of the voices.",
-            "example": "standard"
+            "example": "narration"
           },
           {
             "name": "gender",
@@ -40,7 +39,7 @@
               "type": "string",
               "enum": ["male", "female"]
             },
-            "description": "Gender of the voices.",
+            "description": "Gender filter for the voices.",
             "example": "female"
           },
           {
@@ -50,7 +49,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Language of the voices.",
+            "description": "Language filter for the voices.",
             "example": "en-US"
           },
           {
@@ -59,9 +58,10 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "example": 1
+              "minimum": 1
             },
-            "description": "The page number for pagination."
+            "description": "Page number for pagination.",
+            "example": 1
           },
           {
             "name": "limit",
@@ -69,9 +69,11 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "example": 10
+              "minimum": 1,
+              "maximum": 100
             },
-            "description": "The number of voices per page."
+            "description": "Number of voices per page.",
+            "example": 10
           },
           {
             "name": "Authorization",
@@ -80,53 +82,23 @@
             "schema": {
               "type": "string"
             },
-            "description": "Bearer token for authorization."
+            "description": "Bearer token for authentication.",
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cC..."
           }
         ],
         "responses": {
           "200": {
-            "description": "Paginated list of voices.",
+            "description": "Paginated list of voices retrieved successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageVoicesRespModel"
-                },
-                "examples": {
-                  "example-1": {
-                    "summary": "Successful Response",
-                    "value": {
-                      "status": "success",
-                      "voices": [
-                        {
-                          "voiceId": "voice123",
-                          "name": "VoiceOne",
-                          "gender": "female",
-                          "language": "en-US",
-                          "category": "standard",
-                          "description": "A standard female voice in US English."
-                        },
-                        {
-                          "voiceId": "voice456",
-                          "name": "VoiceTwo",
-                          "gender": "male",
-                          "language": "en-UK",
-                          "category": "premium",
-                          "description": "A premium male voice in UK English."
-                        }
-                      ],
-                      "pagination": {
-                        "currentPage": 1,
-                        "totalPages": 3,
-                        "totalItems": 25
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/PageVoicesResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request - invalid input.",
+            "description": "Bad request - missing or invalid parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -136,7 +108,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized - invalid or missing token.",
+            "description": "Unauthorized - invalid or missing Authorization header.",
             "content": {
               "application/json": {
                 "schema": {
@@ -161,5 +133,64 @@
   },
   "components": {
     "schemas": {
-      "PageVoicesRespModel": {
+      "PageVoicesResponse": {
         "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "example": 10
+          },
+          "total": {
+            "type": "integer",
+            "example": 50
+          },
+          "voices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "voice123"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Narration Voice"
+                },
+                "language": {
+                  "type": "string",
+                  "example": "en-US"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "female"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "narration"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ErrorModel": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Invalid parameters."
+          },
+          "details": {
+            "type": "string",
+            "example": "The 'limit' parameter exceeds the maximum allowed value."
+          }
+        }
+      }
+    }
+  }
+}
