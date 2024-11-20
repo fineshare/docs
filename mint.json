@@ -49,12 +49,6 @@
     }
   ],
   "navigation": [
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
 	{
       "group": "Endpoint Model",
       "pages": [
