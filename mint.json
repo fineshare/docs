@@ -75,7 +75,7 @@
       ]
     },
 	{
-      "group": "Endpoint Model",
+      "group": "Endpoint Model1",
 	  "base_url": "https://models.fineshare.com",
       "pages": [
         "api-reference/endpoint/trainmodel",
