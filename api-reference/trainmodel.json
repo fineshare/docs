@@ -5,10 +5,10 @@
     "version": "1.0.0",
     "description": "API for initiating a user-specific fast train model."
   },
-   "servers": [
+  "servers": [
     {
       "url": "https://models.fineshare.com",
-      "description": "Models"
+      "description": "Models API Server"
     }
   ],
   "paths": {
@@ -17,67 +17,47 @@
         "summary": "User Fast Train Model",
         "operationId": "UserFastTrainModel",
         "tags": ["Model"],
-        "consumes": ["multipart/form-data"],
-        "parameters": [
+        "security": [
           {
-            "name": "name",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Name of the model."
-          },
-          {
-            "name": "languageCode",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code for the model, e.g., 'en-US'."
-          },
-          {
-            "name": "gender",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": ["male", "female"]
-            },
-            "description": "Gender of the voice."
-          },
-          {
-            "name": "audioFile",
-            "in": "formData",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            },
-            "description": "Audio file for training."
-          },
-          {
-            "name": "imageFile",
-            "in": "formData",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            },
-            "description": "Optional image file associated with the model."
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Bearer token for authentication.",
-            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cC..."
+            "bearerAuth": []
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the model."
+                  },
+                  "languageCode": {
+                    "type": "string",
+                    "description": "Language code for the model, e.g., 'en-US'."
+                  },
+                  "gender": {
+                    "type": "string",
+                    "enum": ["male", "female"],
+                    "description": "Gender of the voice."
+                  },
+                  "audioFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Audio file for training."
+                  },
+                  "imageFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Optional image file associated with the model."
+                  }
+                },
+                "required": ["name", "languageCode", "gender", "audioFile"]
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Model successfully initiated for training.",
@@ -124,6 +104,13 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
     "schemas": {
       "SuccessResponse": {
         "type": "object",
