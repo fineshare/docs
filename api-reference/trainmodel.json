@@ -1,17 +1,69 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "User Fast Train Model API",
+    "title": "Fast Train Model API",
     "version": "1.0.0",
-    "description": "API for users to fast-train a model by uploading required files."
+    "description": "API to train a voice model quickly with specified attributes and files."
   },
   "paths": {
-    "/api/userfasttrainmodel": {
+    "/v1/models/train": {
       "post": {
-        "summary": "Fast train a user model",
-        "operationId": "UserFastTrainModel",
+        "summary": "Train a Voice Model",
+        "operationId": "FastTrainModel",
         "tags": ["Model Training"],
+        "consumes": ["multipart/form-data"],
         "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The name of the model to be trained.",
+            "example": "FastVoiceModel123"
+          },
+          {
+            "name": "languageCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Language code of the voice model.",
+            "example": "en-US"
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["male", "female"]
+            },
+            "description": "Gender of the voice model.",
+            "example": "female"
+          },
+          {
+            "name": "audioFile",
+            "in": "formData",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            },
+            "description": "The audio file to train the voice model."
+          },
+          {
+            "name": "imageFile",
+            "in": "formData",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            },
+            "description": "Optional image file representing the voice model."
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -19,62 +71,25 @@
             "schema": {
               "type": "string"
             },
-            "description": "Bearer token for authorization."
+            "description": "Bearer token for authentication.",
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR..."
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "Name of the model.",
-                    "example": "VoiceModel1"
-                  },
-                  "languageCode": {
-                    "type": "string",
-                    "description": "Language code for the model.",
-                    "example": "en-US"
-                  },
-                  "gender": {
-                    "type": "string",
-                    "description": "Gender for the voice model.",
-                    "example": "male"
-                  },
-                  "audioFile": {
-                    "type": "string",
-                    "format": "binary",
-                    "description": "Audio file for training the model."
-                  },
-                  "imageFile": {
-                    "type": "string",
-                    "format": "binary",
-                    "description": "Image file representing the model."
-                  }
-                },
-                "required": ["name", "languageCode", "gender", "audioFile", "imageFile"]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "Model training started successfully.",
+            "description": "Voice model training successfully initiated.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Model training has been initiated."
-                    },
-                    "modelId": {
-                      "type": "string",
-                      "example": "123e4567-e89b-12d3-a456-426614174000"
+                  "$ref": "#/components/schemas/FastTrainModelRespModel"
+                },
+                "examples": {
+                  "example-1": {
+                    "summary": "Success Response",
+                    "value": {
+                      "status": "success",
+                      "modelId": "model123",
+                      "message": "Training has started for the model."
                     }
                   }
                 }
@@ -82,7 +97,7 @@
             }
           },
           "400": {
-            "description": "Bad request - invalid input or missing files.",
+            "description": "Bad request - missing or invalid parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -92,7 +107,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized - invalid or missing token.",
+            "description": "Unauthorized - invalid or missing Authorization header.",
             "content": {
               "application/json": {
                 "schema": {
@@ -117,16 +132,33 @@
   },
   "components": {
     "schemas": {
+      "FastTrainModelRespModel": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "modelId": {
+            "type": "string",
+            "example": "model123"
+          },
+          "message": {
+            "type": "string",
+            "example": "Training has started for the model."
+          }
+        }
+      },
       "ErrorModel": {
         "type": "object",
         "properties": {
           "error": {
             "type": "string",
-            "example": "Invalid input parameters."
+            "example": "Invalid file format."
           },
           "details": {
             "type": "string",
-            "example": "The 'audioFile' and 'imageFile' fields are required."
+            "example": "The provided audio file format is not supported."
           }
         }
       }
