@@ -100,14 +100,16 @@
         "properties": {
           "voice": {
             "type": "string",
-            "example": "voice123"
+            "example": "leo"
           },
           "from": {
             "type": "string",
+			"enum": ["fv-file-changer"],
             "example": "sourceLanguageCode"
           },
           "operation": {
             "type": "string",
+			"enum": ["FVC"],
             "example": "transform"
           },
           "duration": {
@@ -116,6 +118,7 @@
           },
           "engine": {
             "type": "string",
+			"enum": ["v5", "v7"],
             "example": "neural"
           }
         },
