@@ -80,7 +80,7 @@
       ]
     },
     {
-      "group": "Endpoint TTS 1ss",
+      "group": "Endpoint TTS",
       "pages": [
         "api-reference/endpoint/create",
         "api-reference/endpoint/createaudiochanger"
