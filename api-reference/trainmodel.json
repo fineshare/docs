@@ -1,0 +1,135 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "User Fast Train Model API",
+    "version": "1.0.0",
+    "description": "API for users to fast-train a model by uploading required files."
+  },
+  "paths": {
+    "/api/userfasttrainmodel": {
+      "post": {
+        "summary": "Fast train a user model",
+        "operationId": "UserFastTrainModel",
+        "tags": ["Model Training"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Bearer token for authorization."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the model.",
+                    "example": "VoiceModel1"
+                  },
+                  "languageCode": {
+                    "type": "string",
+                    "description": "Language code for the model.",
+                    "example": "en-US"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "description": "Gender for the voice model.",
+                    "example": "male"
+                  },
+                  "audioFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Audio file for training the model."
+                  },
+                  "imageFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Image file representing the model."
+                  }
+                },
+                "required": ["name", "languageCode", "gender", "audioFile", "imageFile"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Model training started successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Model training has been initiated."
+                    },
+                    "modelId": {
+                      "type": "string",
+                      "example": "123e4567-e89b-12d3-a456-426614174000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or missing files.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - unable to process the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorModel": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Invalid input parameters."
+          },
+          "details": {
+            "type": "string",
+            "example": "The 'audioFile' and 'imageFile' fields are required."
+          }
+        }
+      }
+    }
+  }
+}
