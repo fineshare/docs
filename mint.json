@@ -46,11 +46,6 @@
       "name": "Blog",
       "icon": "newspaper",
       "url": "https://mintlify.com/blog"
-    },
-	{
-    "name": "API Reference",
-    "icon": "code",
-    "url": "/docs/api-reference/openapi-1.json"
     }
   ],
   "navigation": [
@@ -81,6 +76,7 @@
     },
 	{
       "group": "Endpoint Model",
+	  "base_url": "https://models.fineshare.com",
       "pages": [
         "api-reference/endpoint/trainmodel",
 		"api-reference/endpoint/listmodels",
@@ -90,6 +86,7 @@
 	,
     {
       "group": "Endpoint Voice",
+	  "base_url": "https://converter.fineshare.com",
       "pages": [
         "api-reference/endpoint/pagevoices",
 		"api-reference/endpoint/getvoicedetail"
@@ -98,12 +95,14 @@
 	,
     {
       "group": "Endpoint TTS",
+	  "base_url": "https://converter.fineshare.com",
       "pages": [
         "api-reference/endpoint/create"
       ]
     },
 	{
       "group": "Endpoint Online Voice Changer",
+	  "base_url": "https://voiceai.fineshare.com",
       "pages": [
 	    "api-reference/endpoint/createaudiochanger",
         "api-reference/endpoint/uploadaudiofile",
@@ -112,6 +111,7 @@
     },
 	{
       "group": "Endpoint Websocket Progress",
+	  "base_url": "https://voiceai.fineshare.com",
       "pages": [
 	    "api-reference/endpoint/changeprogress"
       ]
