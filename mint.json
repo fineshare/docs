@@ -79,6 +79,12 @@
         "api-reference/introduction"
       ]
     },
+	{
+      "group": "Endpoint Model",
+      "pages": [
+        "api-reference/endpoint/trainmodel"
+      ]
+    },
     {
       "group": "Endpoint TTS",
       "pages": [
