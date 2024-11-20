@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Voice Pagination API",
+    "title": "Voice Pagination",
     "version": "1.0.0",
     "description": "API to retrieve a paginated list of available voices."
   },
