@@ -92,6 +92,12 @@
         "api-reference/endpoint/uploadaudiofile",
         "api-reference/endpoint/changeaudiofile"
       ]
+    },
+	{
+      "group": "Endpoint Websocket Progress",
+      "pages": [
+	    "api-reference/endpoint/changeprogress"
+      ]
     }
   ],
   "footerSocials": {
