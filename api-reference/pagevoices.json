@@ -23,7 +23,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+			  "enum": ["v2"]
             },
             "description": "Version of the voices data."
           },
