@@ -1,18 +1,66 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Fast Train Model API",
+    "title": "Train Model",
     "version": "1.0.0",
-    "description": "API to quickly train a voice model with specified attributes and audio input."
+    "description": "API for initiating a user-specific fast train model."
   },
   "paths": {
-    "/v1/models/train": {
+    "/api/userfasttrainmodel": {
       "post": {
-        "summary": "Train a Voice Model",
-        "operationId": "FastTrainModel",
-        "tags": ["Model Training"],
+        "summary": "User Fast Train Model",
+        "operationId": "UserFastTrainModel",
+        "tags": ["Model"],
         "consumes": ["multipart/form-data"],
         "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of the model."
+          },
+          {
+            "name": "languageCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Language code for the model, e.g., 'en-US'."
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["male", "female", "neutral"]
+            },
+            "description": "Gender of the voice."
+          },
+          {
+            "name": "audioFile",
+            "in": "formData",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            },
+            "description": "Audio file for training."
+          },
+          {
+            "name": "imageFile",
+            "in": "formData",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            },
+            "description": "Optional image file associated with the model."
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -24,58 +72,19 @@
             "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cC..."
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "The name of the model to be trained.",
-                    "example": "FastVoiceModel123"
-                  },
-                  "languageCode": {
-                    "type": "string",
-                    "description": "Language code for the voice model.",
-                    "example": "en-US"
-                  },
-                  "gender": {
-                    "type": "string",
-                    "enum": ["male", "female"],
-                    "description": "Gender of the voice model.",
-                    "example": "female"
-                  },
-                  "audioFile": {
-                    "type": "string",
-                    "format": "binary",
-                    "description": "The audio file to train the model."
-                  },
-                  "imageFile": {
-                    "type": "string",
-                    "format": "binary",
-                    "description": "Optional image file representing the voice model."
-                  }
-                },
-                "required": ["name", "languageCode", "gender", "audioFile"]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "Voice model training successfully initiated.",
+            "description": "Model successfully initiated for training.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FastTrainModelResponse"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request - missing or invalid parameters.",
+            "description": "Bad Request - Invalid or missing parameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -85,7 +94,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized - invalid or missing Authorization header.",
+            "description": "Unauthorized - Invalid or missing Authorization header.",
             "content": {
               "application/json": {
                 "schema": {
@@ -95,7 +104,7 @@
             }
           },
           "500": {
-            "description": "Server error - unable to process the request.",
+            "description": "Internal Server Error - Model training could not be initiated.",
             "content": {
               "application/json": {
                 "schema": {
@@ -110,20 +119,16 @@
   },
   "components": {
     "schemas": {
-      "FastTrainModelResponse": {
+      "SuccessResponse": {
         "type": "object",
         "properties": {
-          "status": {
-            "type": "string",
-            "example": "success"
-          },
-          "modelId": {
-            "type": "string",
-            "example": "model123"
-          },
           "message": {
             "type": "string",
             "example": "Model training initiated successfully."
+          },
+          "modelId": {
+            "type": "string",
+            "example": "model_12345"
           }
         }
       },
@@ -132,11 +137,11 @@
         "properties": {
           "error": {
             "type": "string",
-            "example": "Invalid file format."
+            "example": "Invalid parameters."
           },
           "details": {
             "type": "string",
-            "example": "The provided audio file format is not supported."
+            "example": "The 'audioFile' field is required."
           }
         }
       }
