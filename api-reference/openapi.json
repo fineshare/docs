@@ -90,6 +90,7 @@
         "properties": {
           "Engine": {
             "type": "string",
+			"enum": ["v1", "v5", "v7"],
             "description": "The engine to use for text-to-speech."
           },
           "SliceId": {
@@ -102,10 +103,12 @@
           },
           "AppId": {
             "type": "string",
+			"enum": ["107"],
             "description": "The application identifier."
           },
           "FeatureId": {
             "type": "string",
+			"enum": ["22"],
             "description": "The feature identifier."
           },
           "speech": {
@@ -122,6 +125,7 @@
           },
           "platform": {
             "type": "string",
+			"enum": ["web","win","mac","phone"],
             "description": "The platform for which the speech is generated."
           },
           "WordBoundary": {
