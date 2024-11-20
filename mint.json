@@ -84,7 +84,7 @@
     {
       "group": "Endpoint TTS",
       "pages": [
-        "api-reference/endpoint/texttospeech",
+        "api-reference/endpoint/create",
 		
       ]
     },
