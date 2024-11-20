@@ -51,7 +51,7 @@
     "name": "API Reference",
     "icon": "code",
     "url": "/docs/api-reference/openapi-1.json"
-  }
+    }
   ],
   "navigation": [
     {
@@ -89,8 +89,9 @@
 	{
       "group": "Endpoint Online Voice Changer",
       "pages": [
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/createaudiochanger"
+	    "api-reference/endpoint/createaudiochanger",
+        "api-reference/endpoint/uploadaudiofile",
+      
       ]
     }
   ],
