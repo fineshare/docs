@@ -1,74 +1,46 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "WebSocket Progress",
-    "version": "1.0.0",
-    "description": "API to retrieve the progress of a voice transformation task asynchronously via WebSocket."
+    "title": "Websocket progress",
+    "version": "1.0.0"
   },
-  "servers": [
-    {
-      "url": "https://voiceai.fineshare.com",
-      "description": "OVC"
-    }
-  ],
   "paths": {
     "/ws": {
       "get": {
-        "summary": "WebSocket Progress",
-        "operationId": "OnProgress",
-        "tags": ["WebSocket"],
+        "summary": "Retrieve progress information",
+        "description": "Provides progress details based on the `authorization` query parameter.",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
+            "name": "authorization",
+            "in": "query",
+            "description": "Authentication token provided as a query parameter.",
             "required": true,
             "schema": {
               "type": "string"
-            },
-            "description": "Bearer token for authentication.",
-            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cC..."
+            }
           }
         ],
         "responses": {
-          "101": {
-            "description": "Switching protocols - WebSocket connection established."
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized - invalid or missing Authorization header.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorModel"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server error - unable to establish WebSocket connection.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorModel"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "ErrorModel": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string",
-            "example": "Unauthorized access."
-          },
-          "details": {
-            "type": "string",
-            "example": "The Authorization token is missing or invalid."
+            "description": "Unauthorized"
           }
         }
       }
