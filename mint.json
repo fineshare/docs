@@ -86,7 +86,16 @@
 		"api-reference/endpoint/listmodels",
 		"api-reference/endpoint/removefasttrainmodel"
       ]
-    },
+    }
+	,
+    {
+      "group": "Endpoint Voice",
+      "pages": [
+        "api-reference/endpoint/pagevoices",
+		"api-reference/endpoint/getvoicedetail"
+      ]
+    }
+	,
     {
       "group": "Endpoint TTS",
       "pages": [

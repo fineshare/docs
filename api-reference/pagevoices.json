@@ -1,0 +1,165 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Voice Pagination API",
+    "version": "1.0.0",
+    "description": "API to retrieve a paginated list of available voices."
+  },
+  "paths": {
+    "/api/pagevoices": {
+      "get": {
+        "summary": "Retrieve paginated voices",
+        "operationId": "PageVoices",
+        "tags": ["Voice Management"],
+        "parameters": [
+          {
+            "name": "v",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Version of the voice data.",
+            "example": "1.0"
+          },
+          {
+            "name": "categroy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Category of the voices.",
+            "example": "standard"
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["male", "female"]
+            },
+            "description": "Gender of the voices.",
+            "example": "female"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Language of the voices.",
+            "example": "en-US"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            },
+            "description": "The page number for pagination."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 10
+            },
+            "description": "The number of voices per page."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Bearer token for authorization."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of voices.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageVoicesRespModel"
+                },
+                "examples": {
+                  "example-1": {
+                    "summary": "Successful Response",
+                    "value": {
+                      "status": "success",
+                      "voices": [
+                        {
+                          "voiceId": "voice123",
+                          "name": "VoiceOne",
+                          "gender": "female",
+                          "language": "en-US",
+                          "category": "standard",
+                          "description": "A standard female voice in US English."
+                        },
+                        {
+                          "voiceId": "voice456",
+                          "name": "VoiceTwo",
+                          "gender": "male",
+                          "language": "en-UK",
+                          "category": "premium",
+                          "description": "A premium male voice in UK English."
+                        }
+                      ],
+                      "pagination": {
+                        "currentPage": 1,
+                        "totalPages": 3,
+                        "totalItems": 25
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - unable to process the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PageVoicesRespModel": {
+        "type": "object",
