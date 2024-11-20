@@ -43,7 +43,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["male", "female"]
+              "enum": ["all","male", "female"]
             },
             "description": "Gender filter for the voices.",
             "example": "female"
@@ -64,10 +64,10 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "minimum": 1
+              "minimum": 0
             },
             "description": "Page number for pagination.",
-            "example": 1
+            "example": 0
           },
           {
             "name": "limit",
