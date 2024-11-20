@@ -43,7 +43,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["male", "female", "neutral"]
+              "enum": ["male", "female"]
             },
             "description": "Gender of the voice."
           },
