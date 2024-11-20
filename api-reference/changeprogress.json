@@ -1,0 +1,96 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "WebSocket Progress API",
+    "version": "1.0.0",
+    "description": "API to asynchronously retrieve voice transformation task progress using WebSocket."
+  },
+  "paths": {
+    "/ws": {
+      "get": {
+        "summary": "Retrieve voice transformation task progress asynchronously via WebSocket",
+        "operationId": "OnProgress",
+        "tags": ["WebSocket"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Bearer token for authorization."
+          }
+        ],
+        "responses": {
+          "101": {
+            "description": "Switching Protocols - Successfully initiated WebSocket connection.",
+            "headers": {
+              "Upgrade": {
+                "schema": {
+                  "type": "string",
+                  "example": "websocket"
+                },
+                "description": "Specifies the protocol upgrade."
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "Upgrade"
+                },
+                "description": "Indicates that the connection is being upgraded."
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - unable to process the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorModel": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Invalid authorization token."
+          },
+          "details": {
+            "type": "string",
+            "example": "Authorization header is missing."
+          }
+        }
+      }
+    }
+  }
+}

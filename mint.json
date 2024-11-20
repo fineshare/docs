@@ -46,11 +46,6 @@
       "name": "Blog",
       "icon": "newspaper",
       "url": "https://mintlify.com/blog"
-    },
-	{
-    "name": "API Reference",
-    "icon": "code",
-    "url": "/docs/api-reference/openapi-1.json"
     }
   ],
   "navigation": [
@@ -82,9 +77,7 @@
     {
       "group": "Endpoint TTS",
       "pages": [
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/createaudiochanger"
-		
+        "api-reference/endpoint/text-to-speech",
 		
       ]
     },
@@ -95,7 +88,14 @@
         "api-reference/endpoint/uploadaudiofile",
         "api-reference/endpoint/changeaudiofile"
       ]
-    }
+    },
+	{
+      "group": "Endpoint Websokect progress",
+      "pages": [
+        "api-reference/endpoint/changeprogress",
+		
+      ]
+    },
   ],
   "footerSocials": {
     "x": "https://x.com/mintlify",
