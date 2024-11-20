@@ -57,7 +57,7 @@
               "type": "string"
             },
             "description": "Language filter for the voices.",
-            "example": "en-US"
+            "example": "all,en-US,zh-CN..."
           },
           {
             "name": "page",
