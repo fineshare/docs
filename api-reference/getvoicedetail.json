@@ -5,6 +5,12 @@
     "version": "1.0.0",
     "description": "API to retrieve detailed information about a specific voice."
   },
+  "servers": [
+    {
+      "url": "https://converter.fineshare.com",
+      "description": "Voices"
+    }
+  ],
   "paths": {
     "/api/getvoicedetail": {
       "get": {
