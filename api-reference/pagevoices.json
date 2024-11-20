@@ -5,6 +5,12 @@
     "version": "1.0.0",
     "description": "API for retrieving a paginated list of voices with filtering options."
   },
+  "servers": [
+    {
+      "url": "https://converter.fineshare.com",
+      "description": "Voices"
+    }
+  ],
   "paths": {
     "/api/pagevoices": {
       "get": {

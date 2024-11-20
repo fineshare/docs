@@ -5,6 +5,12 @@
     "version": "1.0.0",
     "description": "API to list user models with pagination support."
   },
+   "servers": [
+    {
+      "url": "https://models.fineshare.com",
+      "description": "Models"
+    }
+  ],
   "paths": {
     "/api/models/list": {
       "get": {

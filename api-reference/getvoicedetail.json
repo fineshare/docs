@@ -3,7 +3,7 @@
   "info": {
     "title": "Voice Detail",
     "version": "1.0.0",
-    "description": "API to retrieve detailed dd information about a specific voice."
+    "description": "API to retrieve detailed information about a specific voice."
   },
   "servers": [
     {

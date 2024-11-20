@@ -5,6 +5,12 @@
     "version": "1.0.0",
     "description": "API to remove a fast-trained model by name."
   },
+   "servers": [
+    {
+      "url": "https://models.fineshare.com",
+      "description": "Models"
+    }
+  ],
   "paths": {
     "/v1/models/{name}": {
       "delete": {

@@ -5,6 +5,12 @@
     "version": "1.0.0",
     "description": "API to retrieve the progress of a voice transformation task asynchronously via WebSocket."
   },
+  "servers": [
+    {
+      "url": "https://voiceai.fineshare.com",
+      "description": "OVC"
+    }
+  ],
   "paths": {
     "/ws": {
       "get": {

@@ -5,6 +5,12 @@
     "version": "1.0.0",
     "description": "API for managing audio file transformations."
   },
+  "servers": [
+    {
+      "url": "https://voiceai.fineshare.com",
+      "description": "OVC"
+    }
+  ],
   "paths": {
     "/api/createaudiofilechanger": {
       "post": {

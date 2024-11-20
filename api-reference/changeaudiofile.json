@@ -5,6 +5,12 @@
     "version": "1.0.0",
     "description": "API for modifying an audio file with various transformation parameters."
   },
+  "servers": [
+    {
+      "url": "https://voiceai.fineshare.com",
+      "description": "OVC"
+    }
+  ],
   "paths": {
     "/api/changeaudiofile": {
       "post": {

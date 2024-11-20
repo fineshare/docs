@@ -5,6 +5,16 @@
     "version": "1.0.0",
     "description": "API for uploading audio files."
   },
+    "servers": [
+    {
+      "url": "https://upload.fineshare.com",
+      "description": "Upload endpoint 1"
+    },
+	{
+      "url": "https://ovc.fineshare.com",
+      "description": "Upload endpoint 2"
+    }
+  ],
   "paths": {
     "/api/uploadaudiofile/{uuid}": {
       "post": {
