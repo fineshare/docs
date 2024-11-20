@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Text-to-Speech API",
+    "title": "Text-to-Speech",
     "description": "API for converting text to speech using FSMSTextToSpeech.",
     "version": "1.0.0"
   },
