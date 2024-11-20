@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Audio File Changer API",
+    "version": "1.0.0",
+    "description": "API for managing audio file transformations."
+  },
+  "paths": {
+    "/api/createaudiofilechanger": {
+      "post": {
+        "summary": "Step 1: Obtain the Voice Transformation Task Node Connection",
+        "operationId": "CreateAudioFileChanger",
+        "tags": ["Audio Transformation"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoiceChangerReqModel"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Bearer token for authorization"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task node successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Task node created successfully."
+                    },
+                    "taskId": {
+                      "type": "string",
+                      "example": "12345"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - unable to process the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateVoiceChangerReqModel": {
+        "type": "object",
+        "properties": {
+          "voice": {
+            "type": "string",
+            "example": "voice123"
+          },
+          "from": {
+            "type": "string",
+            "example": "sourceLanguageCode"
+          },
+          "operation": {
+            "type": "string",
+            "example": "transform"
+          },
+          "duration": {
+            "type": "integer",
+            "example": 60
+          },
+          "engine": {
+            "type": "string",
+            "example": "neural"
+          }
+        },
+        "required": ["voice", "from", "operation", "duration", "engine"]
+      },
+      "ErrorModel": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Invalid input parameters."
+          },
+          "details": {
+            "type": "string",
+            "example": "The 'voice' field is required."
+          }
+        }
+      }
+    }
+  }
+}
