@@ -5,6 +5,12 @@
     "description": "API for converting text to speech using FSMSTextToSpeech.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://converter.fineshare.com",
+      "description": "Voices"
+    }
+  ],
   "paths": {
     "/api/fsmstexttospeech": {
       "post": {
