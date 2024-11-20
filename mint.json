@@ -83,7 +83,8 @@
       "group": "Endpoint Model",
       "pages": [
         "api-reference/endpoint/trainmodel",
-		 "api-reference/endpoint/removefasttrainmodel "
+		"api-reference/endpoint/listmodels",
+		"api-reference/endpoint/removefasttrainmodel"
       ]
     },
     {
