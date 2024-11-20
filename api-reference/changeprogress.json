@@ -3,57 +3,32 @@
   "info": {
     "title": "WebSocket Progress",
     "version": "1.0.0",
-    "description": "API to asynchronously retrieve voice transformation task progress using WebSocket."
+    "description": "API to retrieve the progress of a voice transformation task asynchronously via WebSocket."
   },
   "paths": {
     "/ws": {
       "get": {
-        "summary": "Retrieve voice transformation task progress asynchronously via WebSocket",
+        "summary": "WebSocket Progress",
         "operationId": "OnProgress",
         "tags": ["WebSocket"],
         "parameters": [
           {
             "name": "Authorization",
-            "in": "query",
+            "in": "header",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "Bearer token for authorization."
+            "description": "Bearer token for authentication.",
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cC..."
           }
         ],
         "responses": {
           "101": {
-            "description": "Switching Protocols - Successfully initiated WebSocket connection.",
-            "headers": {
-              "Upgrade": {
-                "schema": {
-                  "type": "string",
-                  "example": "websocket"
-                },
-                "description": "Specifies the protocol upgrade."
-              },
-              "Connection": {
-                "schema": {
-                  "type": "string",
-                  "example": "Upgrade"
-                },
-                "description": "Indicates that the connection is being upgraded."
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request - invalid input or missing parameters.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorModel"
-                }
-              }
-            }
+            "description": "Switching protocols - WebSocket connection established."
           },
           "401": {
-            "description": "Unauthorized - invalid or missing token.",
+            "description": "Unauthorized - invalid or missing Authorization header.",
             "content": {
               "application/json": {
                 "schema": {
@@ -63,7 +38,7 @@
             }
           },
           "500": {
-            "description": "Server error - unable to process the request.",
+            "description": "Server error - unable to establish WebSocket connection.",
             "content": {
               "application/json": {
                 "schema": {
@@ -83,11 +58,11 @@
         "properties": {
           "error": {
             "type": "string",
-            "example": "Invalid authorization token."
+            "example": "Unauthorized access."
           },
           "details": {
             "type": "string",
-            "example": "Authorization header is missing."
+            "example": "The Authorization token is missing or invalid."
           }
         }
       }
