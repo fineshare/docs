@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Audio File Upload API",
+    "title": "Audio File Upload",
     "version": "1.0.0",
     "description": "API for uploading audio files."
   },

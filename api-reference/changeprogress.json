@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "WebSocket Progress API",
+    "title": "WebSocket Progress",
     "version": "1.0.0",
     "description": "API to asynchronously retrieve voice transformation task progress using WebSocket."
   },

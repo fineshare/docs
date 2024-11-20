@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Voice Detail API",
+    "title": "Voice Detail",
     "version": "1.0.0",
     "description": "API to retrieve detailed information about a specific voice."
   },

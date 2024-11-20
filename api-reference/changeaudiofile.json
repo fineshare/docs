@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Audio File Modification API",
+    "title": "Audio File Modification",
     "version": "1.0.0",
     "description": "API for modifying audio file properties."
   },
