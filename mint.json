@@ -84,7 +84,7 @@
     {
       "group": "Endpoint TTS",
       "pages": [
-        "api-reference/endpoint/text-to-speech",
+        "api-reference/endpoint/texttospeech",
 		
       ]
     },
@@ -99,7 +99,7 @@
 	{
       "group": "Endpoint Websokect progress",
       "pages": [
-        "api-reference/endpoint/changeprogress",
+        "api-reference/endpoint/changeprogress"
 		
       ]
     },
