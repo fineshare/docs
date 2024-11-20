@@ -3,7 +3,7 @@
   "info": {
     "title": "Train Model",
     "version": "1.0.0",
-    "description": "API to train a voice model quickly with specified attributes and files."
+    "description": "API to quickly train a voice model with specified attributes and audio input."
   },
   "paths": {
     "/v1/models/train": {
@@ -14,57 +14,6 @@
         "consumes": ["multipart/form-data"],
         "parameters": [
           {
-            "name": "name",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The name of the model to be trained.",
-            "example": "FastVoiceModel123"
-          },
-          {
-            "name": "languageCode",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the voice model.",
-            "example": "en-US"
-          },
-          {
-            "name": "gender",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": ["male", "female"]
-            },
-            "description": "Gender of the voice model.",
-            "example": "female"
-          },
-          {
-            "name": "audioFile",
-            "in": "formData",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            },
-            "description": "The audio file to train the voice model."
-          },
-          {
-            "name": "imageFile",
-            "in": "formData",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            },
-            "description": "Optional image file representing the voice model."
-          },
-          {
             "name": "Authorization",
             "in": "header",
             "required": true,
@@ -72,26 +21,55 @@
               "type": "string"
             },
             "description": "Bearer token for authentication.",
-            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR..."
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cC..."
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the model to be trained.",
+                    "example": "FastVoiceModel123"
+                  },
+                  "languageCode": {
+                    "type": "string",
+                    "description": "Language code for the voice model.",
+                    "example": "en-US"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "enum": ["male", "female"],
+                    "description": "Gender of the voice model.",
+                    "example": "female"
+                  },
+                  "audioFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The audio file to train the model."
+                  },
+                  "imageFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Optional image file representing the voice model."
+                  }
+                },
+                "required": ["name", "languageCode", "gender", "audioFile"]
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Voice model training successfully initiated.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FastTrainModelRespModel"
-                },
-                "examples": {
-                  "example-1": {
-                    "summary": "Success Response",
-                    "value": {
-                      "status": "success",
-                      "modelId": "model123",
-                      "message": "Training has started for the model."
-                    }
-                  }
+                  "$ref": "#/components/schemas/FastTrainModelResponse"
                 }
               }
             }
@@ -132,7 +110,7 @@
   },
   "components": {
     "schemas": {
-      "FastTrainModelRespModel": {
+      "FastTrainModelResponse": {
         "type": "object",
         "properties": {
           "status": {
@@ -145,7 +123,7 @@
           },
           "message": {
             "type": "string",
-            "example": "Training has started for the model."
+            "example": "Model training initiated successfully."
           }
         }
       },
