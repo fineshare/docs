@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Model Listing API",
+    "title": "Model Listing",
     "version": "1.0.0",
     "description": "API to list user models with pagination support."
   },
