@@ -118,8 +118,9 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
+    "x": "https://x.com/FineShare_Soft",
+	"youtube" : "https://www.youtube.com/channel/UC9IYcIBGwv2G7aVONsV30mw",
+    "github": "https://github.com/FineShare",
     "linkedin": "https://linkedin.com/company/mintlify"
   }
 }
