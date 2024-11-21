@@ -38,7 +38,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "The type value returned in the previous step."
+            "description": "Bearer token for authorization."
           },
           {
             "name": "Changer-Type",
@@ -47,7 +47,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Bearer token for authorization."
+            "description": "The type value returned in the previous step."
           }
         ],
         "requestBody": {
