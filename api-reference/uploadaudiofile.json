@@ -48,7 +48,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "The type value returned in the previous step."
+            "description": "The type value returned in the step 1."
           }
         ],
         "requestBody": {
