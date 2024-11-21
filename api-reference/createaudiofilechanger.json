@@ -52,7 +52,7 @@
                     },
                     "taskId": {
                       "type": "string",
-                      "example": "12345"
+                      "example": "task_id"
                     }
                   }
                 }
@@ -105,24 +105,20 @@
           "from": {
             "type": "string",
 			"enum": ["fv-file-changer"],
-            "example": "sourceLanguageCode"
+            "example": "fv-file-changer"
           },
           "operation": {
             "type": "string",
 			"enum": ["FVC"],
-            "example": "transform"
-          },
-          "duration": {
-            "type": "integer",
-            "example": 60
+            "example": "FVC"
           },
           "engine": {
             "type": "string",
 			"enum": ["v5", "v7"],
-            "example": "neural"
+            "example": "v5"
           }
         },
-        "required": ["voice", "from", "operation", "duration", "engine"]
+        "required": ["voice", "from", "operation", "engine"]
       },
       "ErrorModel": {
         "type": "object",
