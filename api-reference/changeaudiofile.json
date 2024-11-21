@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Start Audio Conversion",
+    "title": "Step 3: Start Audio Conversion",
     "version": "1.0.0",
     "description": "API for modifying an audio file with various transformation parameters."
   },
