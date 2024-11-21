@@ -38,6 +38,15 @@
             "schema": {
               "type": "string"
             },
+            "description": "The type value returned in the previous step."
+          },
+          {
+            "name": "Changer-Type",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
             "description": "Bearer token for authorization."
           }
         ],
