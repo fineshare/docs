@@ -89,16 +89,6 @@
       "FileChangeReqModel": {
         "type": "object",
         "properties": {
-          "groupId": {
-            "type": "string",
-            "description": "Group ID associated with the audio file.",
-            "example": "group123"
-          },
-          "sliceId": {
-            "type": "string",
-            "description": "Slice ID of the audio file.",
-            "example": "slice456"
-          },
           "uuid": {
             "type": "string",
             "description": "Unique identifier of the audio file.",
@@ -107,50 +97,35 @@
           "voice": {
             "type": "string",
             "description": "Voice type for transformation.",
-            "example": "narration"
-          },
-          "designUuid": {
-            "type": "string",
-            "description": "Unique identifier for the design.",
-            "example": "design123"
+            "example": "spongebob"
           },
           "pitch": {
             "type": "number",
             "format": "float",
             "description": "Pitch adjustment value.",
-            "example": 1.2
+            "example": 0.0
           },
           "speed": {
             "type": "number",
             "format": "float",
             "description": "Speed adjustment value.",
-            "example": 1.5
+            "example": 1.0
           },
           "from": {
             "type": "string",
 			"enum": ["fv-file-changer"],
             "description": "Source format or language.",
-            "example": "en-US"
+            "example": "fv-file-changer"
           },
           "outputFormat": {
             "type": "string",
             "description": "Desired output format for the audio file.",
-            "example": "mp3"
-          },
-          "duration": {
-            "type": "integer",
-            "description": "Duration of the audio file in seconds.",
-            "example": 120
+            "example": ".mp3"
           },
           "audioName": {
             "type": "string",
             "description": "Name of the audio file.",
             "example": "sample_audio"
-          },
-          "cut": {
-            "type": "integer",
-            "description": "Cut operation identifier.",
-            "example": 0
           },
           "platform": {
             "type": "string",
@@ -162,37 +137,17 @@
             "description": "Advanced pitch control settings.",
             "example": "semi-tone"
           },
-          "effect": {
-            "type": "string",
-            "description": "Special effect to apply to the audio.",
-            "example": "echo"
-          },
-          "amotion": {
-            "type": "string",
-            "description": "Emotion or tone of the audio.",
-            "example": "happy"
-          },
           "operation": {
             "type": "string",
 	        "enum": ["FVC"],
             "description": "Type of operation to perform.",
-            "example": "transform"
-          },
-          "thumbnailUrl": {
-            "type": "string",
-            "description": "URL for the thumbnail of the audio.",
-            "example": "http://example.com/thumbnail.jpg"
+            "example": "FVC"
           },
           "engine": {
             "type": "string",
 			"enum": ["v5", "v7"],
             "description": "Engine used for processing.",
-            "example": "engine_v1"
-          },
-          "step": {
-            "type": "integer",
-            "description": "Processing step identifier.",
-            "example": 2
+            "example": "v5"
           },
           "auto_f0_adjust": {
             "type": "boolean",
