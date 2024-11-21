@@ -2,24 +2,50 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Train Model",
-    "version": "1.0.0",
-    "description": "API for initiating a user-specific fast train model."
+    "version": "1.0.0"
   },
-  "servers": [
-    {
-      "url": "https://models.fineshare.com",
-      "description": "Models API Server"
-    }
-  ],
   "paths": {
     "/api/userfasttrainmodel": {
       "post": {
         "summary": "User Fast Train Model",
-        "operationId": "UserFastTrainModel",
-        "tags": ["Model"],
-        "security": [
+        "description": "Uploads user data for fast model training.",
+        "operationId": "userFastTrainModel",
+        "parameters": [
           {
-            "bearerAuth": []
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "description": "The name of the user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "languageCode",
+            "in": "query",
+            "required": true,
+            "description": "The language code (e.g., 'en', 'zh').",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "required": true,
+            "description": "The gender of the user (e.g., 'male', 'female').",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Authorization token.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -29,115 +55,70 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string",
-					"in": "query",
-                    "description": "Name of the model."
-                  },
-                  "languageCode": {
-                    "type": "string",
-					"in": "query",
-                    "description": "Language code for the model, e.g., 'en-US'."
-                  },
-                  "gender": {
-                    "type": "string",
-					"in": "query",
-                    "enum": ["male", "female"],
-                    "description": "Gender of the voice."
-                  },
                   "audioFile": {
                     "type": "string",
                     "format": "binary",
-                    "description": "Audio file for training."
+                    "description": "The audio file to upload."
                   },
                   "imageFile": {
                     "type": "string",
                     "format": "binary",
-                    "description": "Optional image file associated with the model."
+                    "description": "The image file to upload."
                   }
                 },
-                "required": ["name", "languageCode", "gender", "audioFile"]
+                "required": ["audioFile", "imageFile"]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Model successfully initiated for training.",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Model training started successfully."
+                    }
+                  }
                 }
               }
             }
           },
           "400": {
-            "description": "Bad Request - Invalid or missing parameters.",
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorModel"
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid input."
+                    }
+                  }
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized - Invalid or missing Authorization header.",
+            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorModel"
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Authorization required."
+                    }
+                  }
                 }
               }
             }
-          },
-          "500": {
-            "description": "Internal Server Error - Model training could not be initiated.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorModel"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
-    },
-    "schemas": {
-      "SuccessResponse": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "Model training initiated successfully."
-          },
-          "modelId": {
-            "type": "string",
-            "example": "model_12345"
-          }
-        }
-      },
-      "ErrorModel": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string",
-            "example": "Invalid parameters."
-          },
-          "details": {
-            "type": "string",
-            "example": "The 'audioFile' field is required."
           }
         }
       }
