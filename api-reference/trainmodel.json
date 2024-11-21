@@ -4,6 +4,12 @@
     "title": "Train Model",
     "version": "1.0.0"
   },
+   "servers": [
+    {
+      "url": "https://models.fineshare.com",
+      "description": "Models"
+    }
+  ],
   "paths": {
     "/api/userfasttrainmodel": {
       "post": {
