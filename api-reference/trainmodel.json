@@ -31,14 +31,17 @@
                 "properties": {
                   "name": {
                     "type": "string",
+					"in": "query",
                     "description": "Name of the model."
                   },
                   "languageCode": {
                     "type": "string",
+					"in": "query",
                     "description": "Language code for the model, e.g., 'en-US'."
                   },
                   "gender": {
                     "type": "string",
+					"in": "query",
                     "enum": ["male", "female"],
                     "description": "Gender of the voice."
                   },
