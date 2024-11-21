@@ -29,7 +29,8 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier for the audio file upload task."
+			"example": "task_id",
+            "description": "The task_id returned in the step 1."
           },
           {
             "name": "Authorization",

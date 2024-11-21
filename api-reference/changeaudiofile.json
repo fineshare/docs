@@ -92,7 +92,7 @@
           "uuid": {
             "type": "string",
             "description": "Unique identifier of the audio file.",
-            "example": "uuid789"
+            "example": "task_id"
           },
           "voice": {
             "type": "string",
